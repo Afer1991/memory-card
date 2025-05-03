@@ -1,5 +1,6 @@
 import Header from "./components/Header"
 import Scores from "./components/Scores"
+import Game from "./components/Game"
 
 function App() {
   
@@ -7,6 +8,7 @@ function App() {
     <>
       <Header />
       <Scores />
+      <Game />
     </>
   )
 }

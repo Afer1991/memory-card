@@ -3,7 +3,7 @@ import Card from "./Card"
 const Game = () => {
 
   return(
-    <section>
+    <section className="game">
       <Card />
       <Card />
       <Card />

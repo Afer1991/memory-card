@@ -3,8 +3,10 @@ import svg from "../assets/react.svg"
 const Card = () => {
   
   return(
-    <div>
-      <img src={svg} alt="" />
+    <div className="card">
+      <div className="imgContainer">
+        <img src={svg} alt="" />
+      </div>
       <h2>Pokemon</h2>
     </div>
   );

@@ -3,8 +3,8 @@
 const Header = () => {
   
   return(
-    <header>
-      <h1>Memory Card</h1>
+    <header className="header">
+      <h1>MEMORY CARD</h1>
     </header>
   );
 };

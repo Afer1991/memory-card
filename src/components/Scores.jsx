@@ -1,8 +1,8 @@
 
 
 const Scores = ({
-  currScore = 0,
-  topScore = 6
+  currScore,
+  topScore
 }) => {
 
   return(

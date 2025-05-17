@@ -9,6 +9,9 @@ function App() {
   
   const [pokeNames, setPokeNames] = useState([]);
   const [pokeArray, setPokeArray] = useState([1, 2, 3, 4, 5, 6]);
+  const [clickedCard, setClickedCard] = useState([]);
+  const [score, setScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
 
   const fetchPokeInfo = async(pokemon) => {
     try { 
@@ -47,17 +50,31 @@ function App() {
     getPokemon()
   },[pokeArray])
 
-  function randomizeArray() {
-    const sortedArray = pokeArray.sort(() => Math.random() - 0.5);
-    setPokeArray([...sortedArray]);
+  function clickCard(pokemon) {
+    if (!clickedCard.includes(pokemon)) {
+      const sortedArray = pokeArray.sort(() => Math.random() - 0.5);
+      setPokeArray([...sortedArray]);
+      setScore(score + 1);
+      setClickedCard([...clickedCard, pokemon]);
+
+      if (score > bestScore) {
+        setBestScore(score);
+      };
+    } else {
+      setScore(0);
+      setClickedCard([]);
+    };
   }
 
   return (
     <>
       <Header />
-      <Scores />
+      <Scores 
+        currScore={score}
+        topScore={bestScore}
+      />
       <section className="game">
-        { pokeNames.map(item => <Card key={item.name} image={item.image} name={item.name} clckFunc={randomizeArray} />) }
+        { pokeNames.map(pokemon => <Card key={pokemon.name} image={pokemon.image} name={pokemon.name} clckFunc={() => clickCard(pokemon.name)} />) }
       </section>
       <Footer />
     </>

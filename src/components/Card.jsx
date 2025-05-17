@@ -1,13 +1,17 @@
-import svg from "../assets/react.svg"
 
-const Card = () => {
+
+const Card = ({
+  image,
+  name,
+  clckFunc
+}) => {
   
   return(
-    <div className="card">
+    <div className="card" onClick={clckFunc}>
       <div className="imgContainer">
-        <img src={svg} alt="" />
+        <img src={image} alt="" />
       </div>
-      <h2>Pokemon</h2>
+      <h2>{name}</h2>
     </div>
   );
 };

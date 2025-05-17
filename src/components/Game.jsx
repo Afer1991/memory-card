@@ -1,7 +1,7 @@
 import Card from "./Card"
 
 const Game = () => {
-
+  
   return(
     <section className="game">
       <Card />

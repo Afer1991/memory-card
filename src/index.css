@@ -99,6 +99,44 @@
   color: #FFF;
 }
 
+.gameOver {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gameOver > div {
+  background: #FFF;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.gameOver h2 {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: .75rem;
+}
+
+button {
+  padding: .75rem;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  background: #008DD5;
+  color: #FFF;
+}
+
+button:hover {
+  opacity: .85;
+}
+
 .footer a {
   color: #FFF;
   font-size: 2rem;
@@ -130,6 +168,10 @@
   .card h2 {
     font-size: 1.75rem;
   }
+
+  .gameOver h2 {
+    font-size: 3rem;
+  }
 }
 
 @media (min-width: 1000px) {
@@ -143,6 +185,10 @@
 
   .card h2 {
     font-size: 1.75rem;
+  }
+
+  .gameOver h2 {
+    font-size: 3.5rem;
   }
 }
 

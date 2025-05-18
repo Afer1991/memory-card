@@ -1,6 +1,6 @@
 import Header from "./components/Header"
 import Scores from "./components/Scores"
-import Game from "./components/Game"
+import GameOver from "./components/GameOver"
 import Card from "./components/Card"
 import Footer from "./components/Footer"
 import { useState , useEffect} from 'react'
@@ -12,6 +12,7 @@ function App() {
   const [clickedCard, setClickedCard] = useState([]);
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
 
   const fetchPokeInfo = async(pokemon) => {
     try { 
@@ -39,10 +40,10 @@ function App() {
         fetchPokeInfo(pokeArray[5]),
       ])
   
-      setPokeNames(results.map(x => {
+      setPokeNames(results.map(pokemon => {
         return {
-          name: x.name,
-          image: x.sprites.front_default
+          name: pokemon.name,
+          image: pokemon.sprites.front_default
         }
       }))
     }
@@ -54,17 +55,30 @@ function App() {
     if (!clickedCard.includes(pokemon)) {
       const sortedArray = pokeArray.sort(() => Math.random() - 0.5);
       setPokeArray([...sortedArray]);
-      setScore(score + 1);
+      const newScore = score + 1;
+      setScore(newScore);
       setClickedCard([...clickedCard, pokemon]);
 
-      if (score > bestScore) {
-        setBestScore(score);
+      if (newScore > bestScore) {
+        setBestScore(newScore);
       };
+
+      if (newScore === 6) {
+        setGameOver(true);
+      }
+      
     } else {
       setScore(0);
       setClickedCard([]);
     };
   }
+
+  const playAgain = () => {
+    setGameOver(false);
+    setScore(0);
+    setBestScore(0);
+    setClickedCard([]);
+  };
 
   return (
     <>
@@ -73,9 +87,14 @@ function App() {
         currScore={score}
         topScore={bestScore}
       />
+      {!gameOver ? 
       <section className="game">
-        { pokeNames.map(pokemon => <Card key={pokemon.name} image={pokemon.image} name={pokemon.name} clckFunc={() => clickCard(pokemon.name)} />) }
-      </section>
+         {pokeNames.map(pokemon => <Card key={pokemon.name} image={pokemon.image} name={pokemon.name} clckFunc={() => clickCard(pokemon.name)} />)} 
+      </section> :
+      <GameOver 
+        restart={playAgain}
+      />
+      }
       <Footer />
     </>
   )

@@ -8,7 +8,7 @@ import { useState , useEffect} from 'react'
 function App() {
   
   const [pokeNames, setPokeNames] = useState([]);
-  const [pokeArray, setPokeArray] = useState([1, 2, 3, 4, 5, 6]);
+  const [pokeArray, setPokeArray] = useState([373, 3, 112, 462, 644, 6]);
   const [clickedCard, setClickedCard] = useState([]);
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
@@ -43,7 +43,7 @@ function App() {
       setPokeNames(results.map(pokemon => {
         return {
           name: pokemon.name,
-          image: pokemon.sprites.front_default
+          image: pokemon.sprites.other.dream_world.front_default
         }
       }))
     }
@@ -51,7 +51,7 @@ function App() {
     getPokemon()
   },[pokeArray])
 
-  function clickCard(pokemon) {
+  const clickCard = (pokemon) => {
     if (!clickedCard.includes(pokemon)) {
       const sortedArray = pokeArray.sort(() => Math.random() - 0.5);
       setPokeArray([...sortedArray]);
@@ -80,6 +80,14 @@ function App() {
     setClickedCard([]);
   };
 
+  const capitalizeStr = (str) => {
+    const firstLetter = str.charAt(0).toUpperCase();
+    const remainingLetters = str.substring(1);
+    const capitalizedStr = firstLetter + remainingLetters;
+
+    return capitalizedStr;
+  };
+
   return (
     <>
       <Header />
@@ -89,7 +97,7 @@ function App() {
       />
       {!gameOver ? 
       <section className="game">
-         {pokeNames.map(pokemon => <Card key={pokemon.name} image={pokemon.image} name={pokemon.name} clckFunc={() => clickCard(pokemon.name)} />)} 
+         {pokeNames.map(pokemon => <Card key={pokemon.name} image={pokemon.image} name={capitalizeStr(pokemon.name)} clckFunc={() => clickCard(pokemon.name)} />)} 
       </section> :
       <GameOver 
         restart={playAgain}
